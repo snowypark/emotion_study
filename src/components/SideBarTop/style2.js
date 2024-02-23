@@ -4,32 +4,33 @@ import { css } from "@emotion/react";
 export const layout = (isShow) => css`
     box-sizing: border-box;
     position: fixed;
-    top: 0;
-    left: ${isShow ? "0px" : "-300px"};
-    z-index: 2;
+    right: 0;
+    z-index: 99;
+    top: ${isShow ? "0px" : "-80px"};
     border-right: 1px solid #dbdbdb;
-    width: 300px;
-    height: 100%;
-    transition: left 0.5s ease-in-out;
+    width: 50%;
+    height: 80px;
+    transition: top 0.5s ease-in-out;
     background-color: white;
     box-shadow: 1px 0px 3px #00000022;
+    
 `;
 
 export const toggleButton = css`
     box-sizing: border-box;
-    position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
-    right: -15px;
+    position: absolute; 
+    transform: translateX(-50%);
+    right: 10%;
+    bottom: -15px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     border: 1px solid #dbdbdb;
-    border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    width: 15px;
-    height: 50px;
+    border-bottom-left-radius: 8px;
+    width: 20px;
+    height: 15px;
     cursor: pointer;
     background-color: white;
     &:hover {
@@ -42,20 +43,24 @@ export const toggleButton = css`
 
 export const menuList = css `
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0px;
-    
+    flex-direction: row;
+    justify-content: center;
+    align-items: censter;
+    position: relative;    
+    top: 50%;    
+    left: 50%;    
+    transform: translate(-50%, -50%);
 `;
 
 export const menuItems = css `
-    display: flex;
+    display: flex;    
+    flex-direction: column;
+    position: relative;         
     justify-content: center;
     align-items: censter;
-
-    border-bottom: 1px solid #dbdbdb;
-
-    width: 100%;
+    margin : auto 20px;
+    border: 1px solid #dbdbdb;    
+    width: 200px;
     height: 50px;
     color: black;
     font-weight: 600;
@@ -67,4 +72,12 @@ export const menuItems = css `
     &:hover {
         background-color: #dbdbdb
     }
+`;
+
+export const liItems = css `
+    display: flex;  
+    position: relative;       
+    justify-content: center;
+    align-items: censter;
+    
 `;
