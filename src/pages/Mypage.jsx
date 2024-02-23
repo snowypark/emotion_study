@@ -12,7 +12,9 @@ function Mypage() {
     const handleImgFileChange = (e) => {
         const fileReader = new FileReader();
 
-        console.log(e.target.files);
+        if(e.target.files.length === 0) {
+            return;
+        }
 
         fileReader.onload = (e) => {
             setPrivew(e.target.result);
