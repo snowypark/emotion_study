@@ -41,7 +41,7 @@ function ImageEx() {
         setUrls(!localStorage.getItem("urls") ? [] : JSON.parse(localStorage.getItem("urls")));
     }, []);
 
-    const [ progressPercent, setProgressPercent ] = useState(0);
+    const [ progressPercent, setProgressPercent ] = useState([0]);
 
     const [ uploadFiles, setUploadFiles ] = useState([]);
     const [ previews, setPrivews ] = useState([]);
