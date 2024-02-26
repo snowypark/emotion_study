@@ -1,6 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '../../configs/firebase/firabseConfig';
+import { Line } from 'rc-progress';
+import { v4 as uuid} from "uuid";
+import { json } from 'react-router-dom';
 
 const layout = css `
     display : flex;
@@ -31,25 +36,34 @@ const imageLayout = css `
 
 function ImageEx() {
 
-    const imgFileRef = useRef();
+    const [urls, setUrls ] =useState([]);
+    useEffect(() => {
+        setUrls(!localStorage.getItem("urls") ? [] : JSON.parse(localStorage.getItem("urls")));
+    }, []);
+
+    const [ progressPercent, setProgressPercent ] = useState(0);
+
+    const [ uploadFiles, setUploadFiles ] = useState([]);
     const [ previews, setPrivews ] = useState([]);
-
+    const imgFileRef = useRef();
+    
     const handleFileChange = (e) => {
-        console.log(e.target.fiels);
-
-        let promises = [];
-
-        // let ps = [
-        //         new Promise(reslove => reslove(1)), 
-        //         new Promise(reslove => reslove(2)), 
-        //         new Promise(reslove => reslove(1))
-        //     ];
-        // Promise.all(ps).then(result => console.log(result));
 
         // map 방식
         const files = Array.from(e.target.files); // array로 변경 -> map 가능
-        promises = files.map(file => new Promise((resolve) => {
+                
+        
+        if(files.length===0) {
+            imgFileRef.current.value = "";
+            return;
+        }
 
+        setUploadFiles(files);
+        let promises = [];
+        
+        console.log(e.target.fiels);
+        
+        promises = files.map(file => new Promise((resolve) => {
             const fileReader = new FileReader();        
             
             fileReader.onload = (e) => {
@@ -79,23 +93,55 @@ function ImageEx() {
         Promise.all(promises)
         .then(result => {
             setPrivews(result);
-            console.log(result);
         });
     }
 
-    return (
-        <div css={layout}>     
-                {previews.map ((preivew, index) => 
-                        <div key ={index} css={imageLayout}>
-                            <img src={preivew} alt="" />
-                        </div>
-                )}
+    const handleImageUpload = () => {
+        const file = uploadFiles[0];
+        const sotrageRef = ref(storage, `files/test/${uuid()}_${file.name}`);
+        const uploadTesk = uploadBytesResumable(sotrageRef, file);
 
-                <input style={{display:"none"}}  multiple={true}
+        uploadTesk.on(
+            "state_changed",
+            (snapshot) => {
+                setProgressPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100))
+            },
+            (error) => {},
+            () => {
+                getDownloadURL(sotrageRef).then(urls => {
+                    localStorage.setItem(JSON.stringify(urls));
+                    setUrls(urls);
+                    setPrivews([]);
+                });
+            },
+        );
+    }
+
+    return (
+             <div css={layout}>    
+
+                {urls.map(url => {
+                    <div  css={imageLayout}>
+                        <img src={url} alt="" />                    
+                    </div>
+                })}
+
+
+            {previews.map((preview, index) => 
+                <>
+                    <div key={index} css={imageLayout}>
+                        <img src={preview} alt="" />
+                    </div>
+                    <Line percent={progressPercent} strokeWidth={4} strokeColor={"#22222"}/>
+                </>
+            )}
+                
+
+            <input style={{display:"none"}}  multiple={true}
                     type="file" ref={imgFileRef} onChange={handleFileChange}/>
 
-                <button onClick={() => imgFileRef.current.click()}>이미지 불러오기</button>           
-              
+            <button onClick={() => imgFileRef.current.click()}>이미지 불러오기</button>           
+            <button onClick={handleImageUpload}>이미지 업로드</button>
         </div>
     );
 }

@@ -1,5 +1,10 @@
 # Getting Started with Create React App
 
+npm install uuid
+npm install firebase
+npm i dotenv
+npm i rc-progress
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
