@@ -113,15 +113,15 @@ export const profileInput = css`
         transform: translateY(-50%);
         top: 50%;
         left: 23px;
+        color: #333;
         font-weight: 600;
         transition: all 0.2s ease-in-out;
     }
 
-    &:focus + lable , &:not(:placeholder-shown) + label {
+    &:focus + label, &:not(:placeholder-shown) + label {
         top: 13px;
-        left: 5px;
-        font-size: 12;
-        color: #333;
+        left: 23px;
+        font-size: 11px;
     }
 `;
 
