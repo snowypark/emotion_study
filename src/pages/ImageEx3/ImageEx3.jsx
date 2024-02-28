@@ -16,13 +16,14 @@ const imgLayout = css`
     align-items: center;
 
     border: 1px solid #dbdbdb;
-    border-radius: 50%;
+    border-radius: 20%;
     width: 300px;
     height: 300px;
     overflow: hidden;
 
     & > img {
         width: 100%;
+        height: 100%;
     }
 `;
 
@@ -84,7 +85,9 @@ function ImageEx3() {
                 </div>)
             }
             
-            <input type="file" style={{display: "none"}} multiple={true} ref={fileInputRef} onChange={handleFileChange} />
+            <input type="file" style={{display: "none"}} multiple={true} ref={fileInputRef} 
+            onChange={handleFileChange} />
+
             <button onClick={() => fileInputRef.current.click()}>불러오기</button>
         </div>
     );
