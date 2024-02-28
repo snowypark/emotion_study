@@ -1,101 +1,85 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    padding: 100px 30px 0px ;
-    
+    padding: 100px 30px 0px;
 `;
 
-export const profileHeader = css `
-
+export const profileHeader = css`
     box-sizing: border-box;
     margin: 0px auto 20px;
     border: 1px solid #dbdbdb;
-    width : 700px;
-
+    padding: 30px;
+    width: 700px;
 `;
 
 export const title = css`
-
     margin-bottom: 50px;
     text-align: center;
     font-size: 30px;
     font-weight: 700;
-
 `;
 
-
-export const prifileImg = css `
-    
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+export const profileImg = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto 20px;
     box-sizing: border-box;
-    border : 1px solid #dbdbdb;
-    border-radius : 50%;
-    margin: 0 auto 20px;
-    
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
     width: 200px;
     height: 200px;
     overflow: hidden;
+    cursor: pointer;
     & > img {
         width: 100%;
     }
-    cursor: pointer;
-
 `;
 
-export const nicnknameLayout = css `
-
-    display:flex;
-    justify-content:center;
+export const nicknameLayout = css`
+    display: flex;
+    justify-content: center;
     margin-bottom: 20px;
-
 `;
 
-export const nickname = css `
-
-    box-sizing : border-box;
-    outline:none;
-    width:200px;
-    border : none;
-    border-bottom : 2px solid #dbdbdb;
+export const nickname = css`
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #dbdbdb;
     padding: 5px 10px 0px;
-    text-align : center;
-    font-size : 18px;
-    transition : background-color 0.3s ease-in-out;
-    font-weight:600;
-    &:focus {
-        background-color:#fafafa;
-        border-bottom:2px solid #bbb;
-    }
+    text-align: center;
+    width: 200px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
     cursor: pointer;
-    
+
+    &:focus {
+        border-bottom: 2px solid #bbb;
+        background-color: #fafafa;
+    }
 `;
 
-export const prifileInputLayout = css`
-
+export const profileInputLayout = css`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing: border-box;
     margin: 0px auto 20px;
     border: 1px solid #dbdbdb;
-    width: 700px;
     padding: 10px;
+    width: 700px;
 `;
 
-export const inputBox = css `
+export const inputBox = css`
     position: relative;
     margin-bottom: 10px;
-
 `;
 
 export const profileInput = css`
-    
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
-    
     padding: 20px 20px 10px;
     font-size: 16px;
 
@@ -103,7 +87,7 @@ export const profileInput = css`
     &:nth-of-type(3n), &:nth-of-type(4n) {
         margin: 0;
     }
-  
+
     &:focus {
         outline: 2px solid #5dd6ff;
     }
@@ -125,30 +109,28 @@ export const profileInput = css`
     }
 `;
 
-export const buttonLayout = css `
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
+export const buttonLayout = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
-export const profilebutton = css `
-    box-sizing : border-box;
+export const profileButton = css`
+    box-sizing: border-box;
     border: 1px solid #dbdbdb;
     padding: 10px 20px;
+    width: 700px;
+    height: 50px;
     background-color: white;
-    font-size:12px;
-    font-weight : 600;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    width : 700px;
-    height : 50px;
 
     &:hover {
         background-color: #fafafa;
     }
 
     &:active {
-        background-color: #dbdbdb;
+        background-color: #eeeeee;
     }
 `;
-
