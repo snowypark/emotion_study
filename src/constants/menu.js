@@ -1,4 +1,5 @@
 
+import ImageEx2 from "../pages/ImageEx2/ImageEx2";
 import ImageEx3 from "../pages/ImageEx3/ImageEx3";
 import Mypage from "../pages/Mypage/Mypage";
 import ImageEx from "../pages/imageEx/ImageEx";
@@ -32,7 +33,7 @@ export const MENUS = [
         id: 5,
         path: "/image/ex2",
         name: "이미지 다중",
-        element: <></>
+        element: <ImageEx2 />
     },
     {
         id: 6,

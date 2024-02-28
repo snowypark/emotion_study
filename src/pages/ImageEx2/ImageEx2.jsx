@@ -27,7 +27,7 @@ const imageLayout = css`
     }
 `;
 
-function ImageEx() {
+function ImageEx2() {
     const uploadFilesId = useRef(0);
     const [ oldFiles, setOldFiles ] = useState([]);
     const [ newFiles, setNewFiles ] = useState([]);
@@ -48,7 +48,7 @@ function ImageEx() {
         const uploadFiles = loadFiles.map(file => {
             return {
                 id: uploadFilesId.current += 1,
-                progressPercent: 0,
+                percent: 0,
                 originFile: file,
                 url: ""
             };
@@ -97,6 +97,7 @@ function ImageEx() {
                 (error) => {},
                 () => {
                     getDownloadURL(storageRef).then(url => {
+                        console.log(url);
                         const newFile = {
                             ...file,
                             ["url"]: url
@@ -139,4 +140,4 @@ function ImageEx() {
     );
 }
 
-export default ImageEx;
+export default ImageEx2;
