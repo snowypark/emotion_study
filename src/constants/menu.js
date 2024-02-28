@@ -1,5 +1,6 @@
-import ImageEx from "../pages/ImageEx/ImageEx";
+
 import Mypage from "../pages/Mypage/Mypage";
+import ImageEx from "../pages/imageEx/ImageEx";
 
 export const MENUS = [
     {
