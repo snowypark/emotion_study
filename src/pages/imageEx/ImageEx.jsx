@@ -34,7 +34,9 @@ function ImageEx() {
     const imgFileRef = useRef();
 
     useEffect(() => {
-        setOldFiles(!localStorage.getItem("oldFiles") ? [] : JSON.parse(localStorage.getItem("oldFiles")));
+        setOldFiles(!localStorage.getItem("oldFiles") 
+        ? [] 
+        : JSON.parse(localStorage.getItem("oldFiles")));
     }, []);
 
     const handleFileChange = (e) => {
@@ -57,7 +59,7 @@ function ImageEx() {
         uploadFilesId.current = 0;
 
         let promises = [];
-
+        
         promises = uploadFiles.map(file => new Promise((resolve) => {
             const fileReader = new FileReader();
 
