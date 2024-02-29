@@ -68,7 +68,7 @@ function BoardWrite() {
     // }, []);
     // hook으로 뺌
 
-    const { boardList, lastId} = useLoadList();
+    const { boardList} = useLoadList();
 
     const [ inputValue, handleInputChange ] = useMaxSizeValidateInput(20);
 
@@ -78,14 +78,18 @@ function BoardWrite() {
 
         // const lastIndex = boardList.length - 1; //boardId가 0일 경우 
         // const lastId = lastIndex < 0 ? 0 : boardList[lastIndex].boardId;
-        
-        const board = {
-            boardId: lastId + 1,
-            boardTitle: inputValue,
-            boardContent: quillValue
-        };
+        let newBoardList = [];
+        for(let i = 0; i < 203; i ++) { // 테스트글 강제로 만들기
 
-        const newBoardList = [...boardList, board];
+            const board = {
+                boardId: i + 1,
+                boardTitle: inputValue + (i + 1),
+                boardContent: quillValue
+            };
+            
+            newBoardList = [...newBoardList, board];
+        }        
+
         localStorage.setItem("boardList", JSON.stringify(newBoardList));
         alert("글 작성 완료.");
         navigate("/board/list"); //원하는 위치로 이동 가능
