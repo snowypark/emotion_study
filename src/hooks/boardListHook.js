@@ -18,35 +18,33 @@ useLoadList() {
     return { boardList, size, firstId, lastId };
 }
 
-export function useLoadListByPageNumber(page) {
-    
-    const boardList = useMemo(() => {
+export function useLoadLlstByPageNumber(page) {
+    const pageNumber = parseInt(page);
+
+    const loadBoardList = useMemo(() => {
         const lsBoardList = localStorage.getItem("boardList");
-        return !lsBoardList ? [] : JSON.parse(localStorage.getItem("boardList"));
+        const loadBoardList = !lsBoardList ? [] : JSON.parse(lsBoardList);
+        return loadBoardList;
     }, [page]);
 
-    const pageNumber = parseInt(page);
-    const size = boardList.length;
+    const boardList = loadBoardList.filter((board, index) => index > (pageNumber * 10) - 11 && index < pageNumber * 10);
+
+    const size = loadBoardList.length;
+
+    const totalPageCount = Math.floor(size % 10 === 0 ? size / 10 : (size / 10) + 1);   
+    const startPageNumber = pageNumber % 5 === 0 ? pageNumber - 4 : (pageNumber - (pageNumber % 5)) + 1
+    const endPasgeNumber = startPageNumber + 4 <= totalPageCount ? startPageNumber + 4 : totalPageCount;
     
-    const totalPageCount = size % 10 === 0 ? size / 10 : size / 10 + 1;
-    const startPageNumber = pageNumber % 5 === 0 
-                            ? pageNumber - 4 
-                            : (pageNumber - (pageNumber % 5)) + 1;
-
-    const endPageNumber = startPageNumber + 4 <= totalPageCount 
-                            ? startPageNumber + 4
-                            : totalPageCount;
-
     let pageNumbers = useMemo(() => {
         let newPageNumbers = [];
 
-        for(let i = startPageNumber; i < endPageNumber; i++ ) {
+        for(let i = startPageNumber; i <= endPasgeNumber; i++) {
             newPageNumbers = [...newPageNumbers, i];
         }
+
         return newPageNumbers;
-        
     }, [startPageNumber]);
     
-    return { boardList, size, pageNumbers, totalPageCount };
+    return { boardList, size, pageNumbers, totalPageCount, startPageNumber, endPasgeNumber };
 
 }
